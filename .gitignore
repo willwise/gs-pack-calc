@@ -2,3 +2,4 @@
 logs
 pack-calculator/go.mod
 pack-calculator/go.sum
+samconfig.toml
