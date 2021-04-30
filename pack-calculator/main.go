@@ -1,9 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"math"
+	"net/http"
 	"sort"
+
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 //create data structures
@@ -17,6 +22,42 @@ type Response struct {
 }
 
 //function to handle the request check data and respond
+func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+
+	//check if json
+	if request.Headers["content-type"] != "application/json" && request.Headers["Content-Type"] != "application/json" {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "request must be in json",
+		}, nil
+	}
+
+	data := &RequestBody{}
+
+	_ = json.Unmarshal([]byte(request.Body), data)
+
+	//TODO
+	//check input is correct format
+	if data.Quantity <= 0 || data.PacksArr == nil || len(data.PacksArr) == 0 {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "input array is in incorrect format",
+		}, nil
+	}
+
+	order := calcOrder(data.PacksArr, data.Quantity)
+
+	response := Response{PacksNeeded: order}
+
+	var jsonData []byte
+
+	jsonData, _ = json.Marshal(response)
+
+	return events.APIGatewayProxyResponse{
+		StatusCode: http.StatusOK,
+		Body:       string(jsonData),
+	}, nil
+}
 
 //function to take the array input and order it from biggest to smallest
 func sortArrayDesc(arr []int) []int {
@@ -61,4 +102,8 @@ func calcOrder(arr []int, quantity int) []int {
 
 	}
 	return returnArr
+}
+
+func main() {
+	lambda.Start(handler)
 }
