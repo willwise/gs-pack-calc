@@ -2,6 +2,17 @@
 
 This is a basic project to create an api which takes in a list of pack sizes and a quantity and feeds out an array of packs needed to fulfill the order. Below is a bit more info on the project
 
+The url of the project is [https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev](https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev)
+The methods available are:
+POST - [/pack-calculator](https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev/pack-calculator)
+The input required is:
+```shell
+{
+    "packsarr": []int example: [ 250, 500, 1000, 2000, 5000],
+    "quantity": int example: 501
+}
+```
+
 ```bash
 .
 ├── Makefile                    <-- Make to automate build
@@ -25,13 +36,13 @@ This is a basic project to create an api which takes in a list of pack sizes and
 
 Before building your project cd into `pack-calculator` directory and run 
 
-```shell
+```bash
 go mod init
 ```
 
 then run
 
-```shell
+```bash
 go mod tidy
 ```
 
