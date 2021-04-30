@@ -1,10 +1,16 @@
 package main
 
+import "sort"
+
 //create data structures
 
 //function to handle the request check data and respond
 
 //function to take the array input and order it from biggest to smallest
+func sortArrayDesc(arr []int) []int {
+	sort.Sort(sort.Reverse(sort.IntSlice(arr)))
+	return arr
+}
 
 //function to take the quantity input and loop through the array of packs allowed and return the array of packs required to fulfill the order
 
