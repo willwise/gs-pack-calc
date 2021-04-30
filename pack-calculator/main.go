@@ -7,6 +7,14 @@ import (
 )
 
 //create data structures
+type RequestBody struct {
+	Quantity int   `json:"quantity"`
+	PacksArr []int `json:"packsarr"`
+}
+
+type Response struct {
+	PacksNeeded []int
+}
 
 //function to handle the request check data and respond
 
