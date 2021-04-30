@@ -13,6 +13,13 @@ The input required is:
 }
 ```
 
+The response is:
+```shell
+{
+    PacksNeeded:[]int example: [ 500, 250 ]
+}
+```
+
 ```bash
 .
 ├── Makefile                    <-- Make to automate build
