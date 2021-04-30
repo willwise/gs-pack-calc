@@ -2,6 +2,16 @@
 
 This is a basic project to create an api which takes in a list of pack sizes and a quantity and feeds out an array of packs needed to fulfill the order. Below is a bit more info on the project
 
+```bash
+.
+├── Makefile                    <-- Make to automate build
+├── README.md                   <-- This instructions file
+├── pack-calculator             <-- Source code for a lambda function
+│   ├── main.go                 <-- Lambda function code
+│   └── main_test.go            <-- Unit tests
+└── template.yaml
+```
+
 The url of the project is [https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev](https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev)
 The methods available are:
 POST - [/pack-calculator](https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev/pack-calculator)
@@ -20,15 +30,7 @@ The response is:
 }
 ```
 
-```bash
-.
-├── Makefile                    <-- Make to automate build
-├── README.md                   <-- This instructions file
-├── pack-calculator             <-- Source code for a lambda function
-│   ├── main.go                 <-- Lambda function code
-│   └── main_test.go            <-- Unit tests
-└── template.yaml
-```
+
 
 ## Requirements
 
