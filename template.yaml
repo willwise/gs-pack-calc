@@ -42,4 +42,5 @@ Resources:
       Cors:
         AllowMethods: "'POST'"
         AllowOrigin: "'*'"
+        AllowHeaders: "'*'"
       OpenApiVersion: '2.0'

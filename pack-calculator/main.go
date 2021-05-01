@@ -56,6 +56,11 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
 		Body:       string(jsonData),
+		Headers: map[string]string{
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Headers": "*",
+			"Access-Control-Allow-Methods": "POST, OPTIONS",
+		},
 	}, nil
 }
 
