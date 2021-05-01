@@ -23,10 +23,16 @@ This is a basic project to create an api which takes in a list of pack sizes and
 
 ### Installing dependencies & building the target 
 
-Before building your project cd into `pack-calculator` directory and run 
+Before building your project cd into `pack-calculator` directory
 
 ```bash
-go mod init
+cd pack-calculator
+```
+
+ and run 
+
+```bash
+go mod init pack-calculator
 ```
 
 then run
@@ -41,6 +47,12 @@ The `sam build` command is wrapped inside of the `Makefile`. To execute this sim
  
 ```shell
 make
+```
+
+or just run
+
+```shell
+sm-build
 ```
 
 ### Local development
