@@ -23,7 +23,6 @@ type Response struct {
 
 //function to handle the request check data and respond
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-
 	//check if json
 	if request.Headers["content-type"] != "application/json" && request.Headers["Content-Type"] != "application/json" {
 		return events.APIGatewayProxyResponse{
@@ -41,12 +40,24 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	_ = json.Unmarshal([]byte(request.Body), data)
 
+	if checkZero(data.PacksArr) {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "input array is in incorrect format",
+			Headers: map[string]string{
+				"Access-Control-Allow-Origin":  "*",
+				"Access-Control-Allow-Headers": "*",
+				"Access-Control-Allow-Methods": "POST, OPTIONS",
+			},
+		}, nil
+	}
+
 	//TODO
 	//check input is correct format
 	if data.Quantity <= 0 || data.PacksArr == nil || len(data.PacksArr) == 0 {
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusBadRequest,
-			Body:       "input array is in incorrect format",
+			Body:       "input is in incorrect format",
 			Headers: map[string]string{
 				"Access-Control-Allow-Origin":  "*",
 				"Access-Control-Allow-Headers": "*",
@@ -86,7 +97,6 @@ func calcOrder(arr []int, quantity int) []int {
 	// Order the array desc
 	sortedArr := sortArrayDesc(arr)
 	// Loop through array
-	fmt.Println(len(sortedArr))
 
 	// If the quantity is between the final 2 choose the larger number to prevent extra packs
 	if quantity > sortedArr[len(sortedArr)-1] && quantity < sortedArr[len(sortedArr)-2] {
@@ -117,6 +127,15 @@ func calcOrder(arr []int, quantity int) []int {
 
 	}
 	return returnArr
+}
+
+func checkZero(array []int) bool {
+	for i := 0; i < len(array); i++ {
+		if array[i] == 0 {
+			return true
+		}
+	}
+	return false
 }
 
 func main() {
