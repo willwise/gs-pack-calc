@@ -9,28 +9,8 @@ This is a basic project to create an api which takes in a list of pack sizes and
 ├── pack-calculator             <-- Source code for a lambda function
 │   ├── main.go                 <-- Lambda function code
 │   └── main_test.go            <-- Unit tests
-└── template.yaml
+└── template.yaml               <-- This is an aws template which defines what we are building (infrastructure as code)
 ```
-
-The url of the project is [https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev](https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev)
-The methods available are:
-POST - [/pack-calculator](https://28nmcxzugk.execute-api.eu-west-2.amazonaws.com/dev/pack-calculator)
-The input required is:
-```shell
-{
-    "packsarr": []int example: [ 250, 500, 1000, 2000, 5000],
-    "quantity": int example: 501
-}
-```
-
-The response is:
-```shell
-{
-    PacksNeeded:[]int example: [ 500, 250 ]
-}
-```
-
-
 
 ## Requirements
 
@@ -109,3 +89,28 @@ To run the tests navigate to the `pack-calculator` directory and run:
 ```shell
 go test -v
 ```
+
+## Methods
+
+### Pack calculator
+
+#### Request:
+
+```shell
+POST /dev/pack-calculator
+Content-Type: application/json
+
+{
+    "packsarr": [ 250, 500, 1000, 2000, 5000],
+    "quantity": 501
+}
+```
+
+#### Response:
+
+```shell
+{
+    PacksNeeded:[]int example: [ 500, 250 ]
+}
+```
+
