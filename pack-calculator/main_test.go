@@ -3,21 +3,22 @@ package main
 import (
 	"reflect"
 	"testing"
+
+	"github.com/aws/aws-lambda-go/events"
 )
 
 var packsarr = []int{250, 500, 1000, 2000, 5000}
 
+//create test structure
+type testCalcOrderStr struct {
+	name  string
+	input int
+	want  []int
+}
+
 func TestCalcOrder(t *testing.T) {
-	//create test structure
-
-	type test struct {
-		name  string
-		input int
-		want  []int
-	}
-
 	//populate tests
-	tests := []test{
+	tests := []testCalcOrderStr{
 		{name: "test 1", input: 1, want: []int{250}},
 		{name: "test 250", input: 250, want: []int{250}},
 		{name: "test 251", input: 251, want: []int{500}},
